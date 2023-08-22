@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/summary"
+    android:title="@string/summary"
+    android:icon="@drawable/summary"
+    android:enabled="true"/>
+
+    <item android:id="@+id/upcoming"
+        android:title="@string/upcoming_bills"
+        android:icon="@drawable/upcoming_bills"
+        android:enabled="true"/>
+
+    <item android:id="@+id/paid"
+        android:title="@string/paid_bills"
+        android:icon="@drawable/paid_bills"
+        android:enabled="true"/>
+
+    <item android:id="@+id/settings"
+        android:title="@string/settings"
+        android:icon="@drawable/settings"
+        android:enabled="true"/>
+</menu>
