@@ -3,10 +3,60 @@ package com.kevine.billzapplication.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.kevine.billzapplication.R
+import com.kevine.billzapplication.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
+    lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        onResume()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupBottomNav()
+    }
+
+    fun setupBottomNav(){
+        binding.bnvhome.setOnItemSelectedListener { menuItem ->
+       when(menuItem.itemId) {
+           R.id.summary -> {
+               supportFragmentManager
+                   .beginTransaction()
+                   .replace(R.id.fvchome, SummaryFragment())
+                   .commit()
+
+               true
+           }
+
+           R.id.upcoming -> {
+                       supportFragmentManager
+                           .beginTransaction()
+                           .replace(R.id.fvchome, UpcomingBillsFragment())
+                           .commit()
+               true
+           }
+
+           R.id.paid -> {
+               supportFragmentManager
+                   .beginTransaction()
+                   .replace(R.id.fvchome, PaidBillsFragment())
+                   .commit()
+               true
+           }
+
+           R.id.settings -> {
+               supportFragmentManager
+                   .beginTransaction()
+                   .replace(R.id.fvchome, SettingsFragment())
+                   .commit()
+               true
+           }
+           else -> false
+
+       }
+        }
     }
 }

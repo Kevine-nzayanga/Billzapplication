@@ -200,9 +200,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
-        else{
-            startActivity(Intent(this, Loginactivity::class.java))
-        }
+
 
     }
 }
