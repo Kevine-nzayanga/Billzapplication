@@ -6,4 +6,6 @@
     <string name="paid_bills">Paid_Bills</string>
     <string name="upcoming_bills">Upcoming_Bills</string>
     <string name="summary">Summary</string>
+    <string name="add_bill">Add Bill</string>
+    <string name="save_bill">Save Bill</string>
 </resources>

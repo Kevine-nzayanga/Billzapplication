@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddBillActivity">
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tbarAddBill"
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_bill"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="91dp"
+                tools:layout_editor_absoluteY="24dp" />
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="270dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="138dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tbarAddBill"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/etAmount"
+            android:layout_width="315dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="74dp"
+            android:layout_marginTop="39dp"
+            android:layout_marginEnd="127dp"
+            android:ems="10"
+            android:hint="Amount"
+            android:inputType="numberDecimal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.229"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etName"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/tvFrequency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="54dp"
+            android:text="Frequency:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etAmount" />
+
+        <Spinner
+            android:id="@+id/spFrequency"
+            android:layout_width="240dp"
+            android:layout_height="57dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvFrequency"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tvFrequency"
+            app:layout_constraintTop_toTopOf="@+id/tvFrequency"
+            app:layout_constraintVertical_bias="0.368" />
+
+        <TextView
+            android:id="@+id/tvDueDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="52dp"
+            android:text="Due Date:"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFrequency" />
+
+        <Spinner
+            android:id="@+id/spDueDate"
+            android:layout_width="264dp"
+            android:layout_height="49dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="152dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDueDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tvDueDate"
+            app:layout_constraintTop_toTopOf="@+id/tvDueDate"
+            app:layout_constraintVertical_bias="0.411" />
+
+        <Button
+            android:id="@+id/btnsavebill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="171dp"
+            android:layout_marginTop="81dp"
+            android:text="@string/save_bill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spDueDate" />
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnsavebill"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
