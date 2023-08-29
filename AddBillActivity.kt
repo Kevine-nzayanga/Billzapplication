@@ -42,47 +42,47 @@ class AddBillActivity : AppCompatActivity() {
 //            navigateToSummaryFragment()
         }
     }}
-//    private fun setupFreqSpinner() {
-//        val adapter = ArrayAdapter.createFromResource(
-//            this, R.array.frequencies, android.R.layout.simple_spinner_item
-//        )
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//        binding.spFrequency.adapter = adapter
-//    }
-//    private fun setupDueDateSpinner() {
-//        binding.spFrequency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                val selectedFrequency = binding.spFrequency.selectedItem.toString()
-//                val dueDateAdapter = when (selectedFrequency) {
-//                    "Monthly" -> {
-//                        val daysInMonth = 1..31
-//                        ArrayAdapter(this@AddBillActivity, android.R.layout.simple_spinner_item, daysInMonth.toList())
-//                    }
-//                    "Quarterly" -> {
-//                        val daysInQuarter = 1..90
-//                        ArrayAdapter(this@AddBillActivity, android.R.layout.simple_spinner_item, daysInQuarter.toList())
-//                    }
-//                    "Annual" -> {
-//                        val daysInYear = 1..365
-//                        ArrayAdapter(this@AddBillActivity, android.R.layout.simple_spinner_item, daysInYear.toList())
-//                    }
-//                    else -> {
-//                        ArrayAdapter(this@AddBillActivity, android.R.layout.simple_spinner_item, arrayOf(1, 2, 3, 4, 5, 6, 7))
-//                    }
-//                }
-//                dueDateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-//                binding.spDueDate.adapter = dueDateAdapter
-//            }
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//                // Do nothing
-//            }
-//        }
-//    }
-//    private fun navigateToSummaryFragment() {
-//        val fragment = SummaryFragment()
-//        val transaction = supportFragmentManager.beginTransaction()
-//        transaction.replace(R.id.fvchome, fragment) // Replace "fragment_container" with your container ID
-//        transaction.addToBackStack(null)
-//        transaction.commit()
-//    }
-//}
+    private fun setupFreqSpinner() {
+        val adapter = ArrayAdapter.createFromResource(
+            this, R.array.frequencies, android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spFrequency.adapter = adapter
+    }
+    private fun setupDueDateSpinner() {
+        binding.spFrequency.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedFrequency = binding.spFrequency.selectedItem.toString()
+                val dueDateAdapter = when (selectedFrequency) {
+                    "Monthly" -> {
+                        val daysInMonth = 1..31
+                        ArrayAdapter(this@AddBillActivity, android.R.layout.simple_spinner_item, daysInMonth.toList())
+                    }
+                    "Quarterly" -> {
+                        val daysInQuarter = 1..90
+                        ArrayAdapter(this@AddBillActivity, android.R.layout.simple_spinner_item, daysInQuarter.toList())
+                    }
+                    "Annual" -> {
+                        val daysInYear = 1..365
+                        ArrayAdapter(this@AddBillActivity, android.R.layout.simple_spinner_item, daysInYear.toList())
+                    }
+                    else -> {
+                        ArrayAdapter(this@AddBillActivity, android.R.layout.simple_spinner_item, arrayOf(1, 2, 3, 4, 5, 6, 7))
+                    }
+                }
+                dueDateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spDueDate.adapter = dueDateAdapter
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
+        }
+    }
+    private fun navigateToSummaryFragment() {
+        val fragment = SummaryFragment()
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fvchome, fragment) // Replace "fragment_container" with your container ID
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+}
