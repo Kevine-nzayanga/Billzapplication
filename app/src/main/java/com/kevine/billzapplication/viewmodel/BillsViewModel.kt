@@ -15,4 +15,11 @@ class BillsViewModel:ViewModel() {
         }
 
     }
+
+    fun createUpcomingBills(){
+        viewModelScope.launch {
+            billsRepo.createRecurringWeeklyBills()
+            billsRepo.createRecurringMonthlyBills()
+        }
+    }
 }

@@ -6,5 +6,8 @@ class Constants {
         const val ACCESS_TOKEN = "ACCESS_TOKEN"
         const val USER_ID= "USER_ID"
         const val EMPTY_STRING = ""
+        val YEARLY="Annual"
+        val MONTHLY="Monthly"
+        val WEEKLY = "Weekly"
     }
 }
