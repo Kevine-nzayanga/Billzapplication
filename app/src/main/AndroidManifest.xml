@@ -17,16 +17,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.AddBillActivity"
+            android:name=".uifile.AddBillActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.HomeActivity"
+            android:name=".uifile.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.Loginactivity"
+            android:name=".uifile.Loginactivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".uifile.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
