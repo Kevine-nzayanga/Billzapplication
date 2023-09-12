@@ -10,7 +10,7 @@ import com.kevine.billzapplication.model.UpcomingBill
 //we make it abstract so that we dont implement the many funs in room
 //we add a companion since due to it being abstract we cant
 //instatiate it
-@Database (entities = [Bill::class, UpcomingBill::class], version = 2)
+@Database (entities = [Bill::class, UpcomingBill::class], version = 3)
 abstract class BillsDb:RoomDatabase() {
 abstract fun billsDao():BillsDao
 abstract fun upcomingBillsDao(): UpcomingBillsDao

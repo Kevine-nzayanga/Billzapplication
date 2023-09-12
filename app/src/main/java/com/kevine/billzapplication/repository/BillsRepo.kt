@@ -58,6 +58,7 @@ class BillsRepo {
     }
 
     suspend fun createRecurringWeeklyBills(){
+
         withContext(Dispatchers.IO){
             val weeklyBills= billsDao.getReccuringBills(Constants.WEEKLY)
             val startDate = DateTimeUtils.getFirstDayOfWeek()
@@ -81,4 +82,29 @@ class BillsRepo {
             }
         }
     }
+    suspend fun createRecurringAnnualBills(){
+        withContext(Dispatchers.IO){
+            val annualBills= billsDao.getReccuringBills(Constants.YEARLY)
+            val year=DateTimeUtils.getCurrentYear()
+            val startDate="01/01/$year"
+            val endDate= "31/12/$year"
+            annualBills.forEach{ bill ->
+                val existing=upcomingBillsDao.queryExistingBills(bill.billId,startDate,endDate)
+                if (existing.isEmpty()){
+                    val newAnnualBill = UpcomingBill(
+                        upcomingBillId = UUID.randomUUID().toString(),
+                        billId = bill.billId,
+                        name = bill.name,
+                        amount = bill.amount,
+                        frequency = bill.frequency,
+                        dueDate = "${bill.dueDate}/$year",
+                        userId = bill.userId,
+                        paid = false
+                    )
+                    upcomingBillsDao.insertUpcomingBills(newAnnualBill)
+                }
+            }
+        }
+    }
+
 }

@@ -11,6 +11,7 @@ import java.time.temporal.TemporalAdjusters.nextOrSame
 import java.time.temporal.TemporalAdjusters.previousOrSame
 import java.time.DayOfWeek.MONDAY
 import java.time.DayOfWeek.SUNDAY
+import java.time.DayOfWeek.of
 import java.time.format.DateTimeFormatter
 
 //import java.util.Calendar.MONDAY
@@ -39,21 +40,13 @@ class DateTimeUtils {
 
         fun getDateOfWeekDay(day:String): String {
             val now = LocalDateTime.now()
-            val date = now.with(nextOrSame(getDayOfWeek(day)))
+            val date= now.with(nextOrSame(of(day.toInt())))
             return formatDateDDMMyyyy(date)
         }
 
-        fun getDayOfWeek(day:String):DayOfWeek{
-            val daysMap = mapOf<String,DayOfWeek>(
-                "1" to  DayOfWeek.MONDAY,
-                "2" to  DayOfWeek.TUESDAY,
-                "3" to  DayOfWeek.WEDNESDAY,
-                "4" to  DayOfWeek.THURSDAY,
-                "5" to  DayOfWeek.FRIDAY,
-                "6" to  DayOfWeek.SATURDAY,
-                "7" to  DayOfWeek.SUNDAY,
-                )
-            return daysMap.getOrDefault(day, MONDAY)
+        fun getCurrentYear():String{
+            val now= LocalDateTime.now()
+            return now.year.toString()
         }
     }
 }
