@@ -1,7 +1,6 @@
 package com.kevine.billzapplication.repository
 
 import com.kevine.billzapplication.BillzApp
-import com.kevine.billzapplication.Database.BillsDao
 import com.kevine.billzapplication.Database.BillsDb
 import com.kevine.billzapplication.model.Bill
 import com.kevine.billzapplication.model.UpcomingBill
