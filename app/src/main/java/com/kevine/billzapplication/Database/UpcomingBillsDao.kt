@@ -1,5 +1,6 @@
 package com.kevine.billzapplication.Database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -16,5 +17,8 @@ interface UpcomingBillsDao {
 
     @Query("SELECT * FROM UpcomingBills WHERE billId =:billId AND dueDate BETWEEN :startDate AND :endDate LIMIT 1")
     fun queryExistingBills(billId:String, startDate:String, endDate:String):List<UpcomingBill>
-
+    @Query ("SELECT* FROM UpcomingBills WHERE frequency = :freq AND paid = :paid ORDER BY dueDate")
+   fun getUpcomingBillsByFrequency(freq:String, paid:Boolean):LiveData<List<UpcomingBill>>
 }
+
+

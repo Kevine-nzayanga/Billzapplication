@@ -1,5 +1,6 @@
 package com.kevine.billzapplication.repository
 
+import androidx.lifecycle.LiveData
 import com.kevine.billzapplication.BillzApp
 import com.kevine.billzapplication.Database.BillsDb
 import com.kevine.billzapplication.model.Bill
@@ -34,6 +35,15 @@ class BillsRepo {
             montlyBills.forEach{bill ->
             val cal =Calendar.getInstance()
             val month = cal.get(Calendar.MONTH)+1
+            var monthstr= month.toString()
+            if (month<10){
+                monthstr="0$month"
+            }
+
+                if (bill.dueDate.length<2){
+                    bill.dueDate = "0${bill.dueDate}"
+                }
+
             val year= cal.get(Calendar.YEAR)
             val startDate = "1/$month/$year"
                 val endDate = "31/$month/$year"
@@ -45,7 +55,7 @@ class BillsRepo {
                         name = bill.name,
                         amount = bill.amount,
                         frequency = bill.frequency,
-                        dueDate = "${bill.dueDate} / $month/$year",
+                        dueDate = "${bill.dueDate} / $monthstr/$year",
                         userId = bill.userId,
                         paid = false
                     )
@@ -107,4 +117,8 @@ class BillsRepo {
         }
     }
 
+    fun getUpcomingBillsByFrequency(frequency:String):LiveData<List<UpcomingBill>>{
+
+        return upcomingBillsDao.getUpcomingBillsByFrequency(frequency, false)
+    }
 }

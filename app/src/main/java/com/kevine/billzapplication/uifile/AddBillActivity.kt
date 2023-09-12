@@ -116,8 +116,18 @@ fun validateBill(){
     val amount = binding.etAmount.text.toString()
     val frequency = binding.spFrequency.selectedItem.toString()
     var dueDate = Constants.EMPTY_STRING
-    if (frequency=="Annual"){
-        dueDate ="$selectedDay/$selectedMonth"
+    if (frequency==Constants.YEARLY){
+        var finalDate=selectedDay.toString()
+        var finalMonth=selectedMonth.toString()
+
+        if (selectedDay<10){
+            finalDate= "0$selectedDay"
+        }
+        if (selectedMonth<10){
+            finalMonth= "0$selectedMonth"
+        }
+
+        dueDate ="$finalDate/$finalMonth"
     }
     else{
         dueDate = binding.spDueDate.selectedItem.toString()

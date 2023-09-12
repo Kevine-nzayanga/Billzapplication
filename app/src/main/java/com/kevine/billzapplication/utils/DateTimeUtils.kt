@@ -38,6 +38,8 @@ class DateTimeUtils {
             return sdf.format(LocalDate)
         }
 
+
+
         fun getDateOfWeekDay(day:String): String {
             val now = LocalDateTime.now()
             val date= now.with(nextOrSame(of(day.toInt())))
