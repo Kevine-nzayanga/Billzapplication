@@ -9,10 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kevine.billzapplication.R
 import com.kevine.billzapplication.databinding.FragmentUpcomingBillsBinding
+import com.kevine.billzapplication.model.Bill
+import com.kevine.billzapplication.model.UpcomingBill
 import com.kevine.billzapplication.viewmodel.BillsViewModel
 
 
-class UpcomingBillsFragment : Fragment() {
+class UpcomingBillsFragment : Fragment(),OnClickBill {
 var binding:FragmentUpcomingBillsBinding?=null
     val billsViewHolder:BillsViewModel by viewModels()
 
@@ -27,21 +29,21 @@ var binding:FragmentUpcomingBillsBinding?=null
     override fun onResume() {
         super.onResume()
         billsViewHolder.getWeeklyUpcoming().observe(this){upcomingWeekly->
-            val adapter = UpcomingBillsAdapter(upcomingWeekly)
+            val adapter = UpcomingBillsAdapter(upcomingWeekly,this)
             binding?.rvweekly?.layoutManager = LinearLayoutManager(requireContext())
             binding?.rvweekly?.adapter= adapter
 
         }
 
         billsViewHolder.getMonthlyUpcoming().observe(this){upcomingMonthly->
-            val adapter = UpcomingBillsAdapter(upcomingMonthly)
+            val adapter = UpcomingBillsAdapter(upcomingMonthly,this)
             binding?.rvmontly?.layoutManager = LinearLayoutManager(requireContext())
             binding?.rvmontly?.adapter= adapter
 
         }
 
         billsViewHolder.getAnnualUpcoming().observe(this){upcomingAnnual->
-            val adapter = UpcomingBillsAdapter(upcomingAnnual)
+            val adapter = UpcomingBillsAdapter(upcomingAnnual,this)
             binding?.rvannual?.layoutManager = LinearLayoutManager(requireContext())
             binding?.rvannual?.adapter= adapter
 
@@ -53,4 +55,8 @@ var binding:FragmentUpcomingBillsBinding?=null
         binding = null
     }
 
+    override fun checkPaidBill(upcomingBill: UpcomingBill) {
+        upcomingBill.paid =!upcomingBill.paid
+        billsViewHolder.updateUpcomingBill(upcomingBill)
+    }
 }

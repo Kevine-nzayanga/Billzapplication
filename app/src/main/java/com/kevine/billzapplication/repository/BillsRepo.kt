@@ -12,6 +12,8 @@ import kotlinx.coroutines.withContext
 import java.util.Calendar
 import java.util.UUID
 
+
+// thingd in dao come here
 class BillsRepo {
     var db = BillsDb.getDatabase(BillzApp.appContext)
     val billsDao = db.billsDao()
@@ -55,7 +57,7 @@ class BillsRepo {
                         name = bill.name,
                         amount = bill.amount,
                         frequency = bill.frequency,
-                        dueDate = "${bill.dueDate} / $monthstr/$year",
+                        dueDate = DateTimeUtils.createDateFromDay(bill.dueDate),
                         userId = bill.userId,
                         paid = false
                     )
@@ -107,7 +109,7 @@ class BillsRepo {
                         name = bill.name,
                         amount = bill.amount,
                         frequency = bill.frequency,
-                        dueDate = "${bill.dueDate}/$year",
+                        dueDate = "$year-${bill.dueDate}",
                         userId = bill.userId,
                         paid = false
                     )
@@ -120,5 +122,15 @@ class BillsRepo {
     fun getUpcomingBillsByFrequency(frequency:String):LiveData<List<UpcomingBill>>{
 
         return upcomingBillsDao.getUpcomingBillsByFrequency(frequency, false)
+    }
+
+    suspend fun updateUpcomingBill(upcomingBill: UpcomingBill){
+        withContext(Dispatchers.IO){
+            upcomingBillsDao.updateUpcomingBill(upcomingBill)
+        }
+    }
+
+    fun getPaidBills():LiveData<List<UpcomingBill>>{
+        return upcomingBillsDao.getPaidBills()
     }
 }

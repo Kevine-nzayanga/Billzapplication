@@ -33,8 +33,8 @@
 
         <EditText
             android:id="@+id/etName"
-            android:layout_width="270dp"
-            android:layout_height="63dp"
+            android:layout_width="320dp"
+            android:layout_height="59dp"
             android:layout_marginStart="63dp"
             android:layout_marginTop="39dp"
             android:layout_marginEnd="138dp"

@@ -12,13 +12,14 @@ import androidx.activity.viewModels
 import com.kevine.billzapplication.databinding.ActivityAddBillBinding
 import com.kevine.billzapplication.model.Bill
 import com.kevine.billzapplication.utils.Constants
+import com.kevine.billzapplication.utils.DateTimeUtils
 import com.kevine.billzapplication.viewmodel.BillsViewModel
 import java.util.UUID
 
 class AddBillActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddBillBinding
-    var selectedMonth=0
-   var  selectedDay =0
+    var selectedMonth = 0
+    var selectedDay = 0
     val billsViewModel: BillsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,7 @@ class AddBillActivity : AppCompatActivity() {
 
     }
 
-    fun setUpNav(){
+    fun setUpNav() {
         setSupportActionBar(binding.tbarAddBill)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -90,81 +91,75 @@ class AddBillActivity : AppCompatActivity() {
 
     }
 
-    fun ShowSpinner(){
+    fun ShowSpinner() {
         binding.dpDueDate.hide()
         binding.spDueDate.show()
     }
-    fun Showdatepicker(){
+
+    fun Showdatepicker() {
         binding.dpDueDate.show()
         binding.spDueDate.hide()
     }
-fun SetupDpDueDate(){
-    val calendar= Calendar.getInstance()
-    binding.dpDueDate.init(calendar.get(Calendar.YEAR),
-        calendar.get(Calendar.MONTH),
-        calendar.get(Calendar.DAY_OF_MONTH)){
-        view,year,month,date ->
-        selectedMonth = month+1
-        selectedDay = date
-    }
-}
 
-
-
-fun validateBill(){
-    val billName= binding.etName.text.toString()
-    val amount = binding.etAmount.text.toString()
-    val frequency = binding.spFrequency.selectedItem.toString()
-    var dueDate = Constants.EMPTY_STRING
-    if (frequency==Constants.YEARLY){
-        var finalDate=selectedDay.toString()
-        var finalMonth=selectedMonth.toString()
-
-        if (selectedDay<10){
-            finalDate= "0$selectedDay"
+    fun SetupDpDueDate() {
+        val calendar = Calendar.getInstance()
+        binding.dpDueDate.init(
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        ) { view, year, month, date ->
+            selectedMonth = month + 1
+            selectedDay = date
         }
-        if (selectedMonth<10){
-            finalMonth= "0$selectedMonth"
+    }
+
+
+    fun validateBill() {
+        val billName = binding.etName.text.toString()
+        val amount = binding.etAmount.text.toString()
+        val frequency = binding.spFrequency.selectedItem.toString()
+        var dueDate = Constants.EMPTY_STRING
+        if (frequency == Constants.YEARLY) {
+            dueDate=DateTimeUtils.createDateFromDayAndMonth(selectedDay,selectedMonth)
+                .substring(5)
+        } else {
+            dueDate = binding.spDueDate.selectedItem.toString()
+        }
+        var error = false
+        if (billName.isBlank()) {
+            error = true
+            binding.etName.error = "Bill Name required"
+        }
+        if (amount.isBlank()) {
+            error = true
+            binding.etAmount.error = "amount required"
+        }
+        if (!error) {
+            val prefs = getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE)
+            val userId = prefs.getString(Constants.USER_ID, Constants.EMPTY_STRING)
+            val bill = Bill(
+                billId = UUID.randomUUID().toString(),
+                name = billName,
+                amount = amount.toDouble(),
+                userId = userId.toString(),
+                frequency = frequency,
+                dueDate = dueDate
+            )
+            billsViewModel.saveBill(bill)
+            resetForm()
         }
 
-        dueDate ="$finalDate/$finalMonth"
-    }
-    else{
-        dueDate = binding.spDueDate.selectedItem.toString()
-    }
-     var error = false
-    if (billName.isBlank()){
-        error = true
-        binding.etName.error= "Bill Name required"
-    }
-    if (amount.isBlank()){
-        error = true
-        binding.etAmount.error = "amount required"
-    }
-    if (!error){
-        val prefs= getSharedPreferences(Constants.PREFS,Context.MODE_PRIVATE)
-        val userId = prefs.getString(Constants.USER_ID,Constants.EMPTY_STRING)
-        val bill = Bill(
-            billId = UUID.randomUUID().toString(),
-            name= billName,
-            amount= amount.toDouble(),
-            userId = userId.toString(),
-            frequency = frequency,
-            dueDate = dueDate
-        )
-        billsViewModel.saveBill(bill)
-        resetForm()
     }
 
-}
-    fun View.show(){
+    fun View.show() {
         this.visibility = View.VISIBLE
     }
-    fun View.hide(){
+
+    fun View.hide() {
         this.visibility = View.GONE
     }
 
-    fun resetForm(){
+    fun resetForm() {
         binding.etName.setText(Constants.EMPTY_STRING)
         binding.etAmount.setText(Constants.EMPTY_STRING)
         binding.spFrequency.setSelection(0)

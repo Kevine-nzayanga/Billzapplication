@@ -19,12 +19,13 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         onResume()
-        billsViewModel.createUpcomingBills()
     }
 
     override fun onResume() {
         super.onResume()
         setupBottomNav()
+        billsViewModel.createUpcomingBills()
+
     }
 
     fun setupBottomNav(){

@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
     fun clearErrorOnType() {
 
         binding.etfirstName.addTextChangedListener(object : TextWatcher {

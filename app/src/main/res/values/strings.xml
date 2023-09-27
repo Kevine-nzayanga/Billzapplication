@@ -2,7 +2,7 @@
     <string name="app_name">Billzapplication</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-<!--    <string name="settings">Settings</string>-->
+    <string name="settings">Settings</string>
     <string name="paid_bills">Paid_Bills</string>
     <string name="upcoming_bills">Upcoming_Bills</string>
     <string name="summary">Summary</string>
