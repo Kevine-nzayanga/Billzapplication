@@ -27,6 +27,9 @@ interface UpcomingBillsDao {
 
    @Query("SELECT*FROM UpcomingBills WHERE paid= :paid ORDER BY dueDate")
    fun getPaidBills(paid: Boolean=true):LiveData<List<UpcomingBill>>
+
+    @Query("SELECT * FROM UpcomingBills WHERE synced = 0")
+    fun getUnsyncedUpcomingBills(): List<UpcomingBill>
 }
 
 

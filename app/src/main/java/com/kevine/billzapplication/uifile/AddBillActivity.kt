@@ -143,7 +143,8 @@ class AddBillActivity : AppCompatActivity() {
                 amount = amount.toDouble(),
                 userId = userId.toString(),
                 frequency = frequency,
-                dueDate = dueDate
+                dueDate = dueDate,
+                synced= false
             )
             billsViewModel.saveBill(bill)
             resetForm()

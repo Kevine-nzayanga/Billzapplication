@@ -14,4 +14,9 @@ interface BillsDao {
 
     @Query("SELECT * FROM Bills WHERE frequency= :freq")
     fun getReccuringBills(freq: String):List<Bill>
+
+    @Query ("SELECT* FROM Bills WHERE synced=0")
+    fun getUnsyncedBills(): List<Bill>
+
+
 }

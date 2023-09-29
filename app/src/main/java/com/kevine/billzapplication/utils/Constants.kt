@@ -8,6 +8,7 @@ class Constants {
         const val EMPTY_STRING = ""
         val YEARLY="Annual"
         val MONTHLY="Monthly"
+        var SYNC_BILLS="Sync_bills"
         val WEEKLY = "Weekly"
         val CREATE_UPCOMING_BILLS = "CREATE_UPCOMING_BILLS"
 

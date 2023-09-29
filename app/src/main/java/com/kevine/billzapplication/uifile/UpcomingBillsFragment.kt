@@ -57,6 +57,9 @@ var binding:FragmentUpcomingBillsBinding?=null
 
     override fun checkPaidBill(upcomingBill: UpcomingBill) {
         upcomingBill.paid =!upcomingBill.paid
+        upcomingBill.synced= false
         billsViewHolder.updateUpcomingBill(upcomingBill)
     }
+
+
 }

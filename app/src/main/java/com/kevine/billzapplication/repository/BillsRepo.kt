@@ -3,6 +3,8 @@ package com.kevine.billzapplication.repository
 import androidx.lifecycle.LiveData
 import com.kevine.billzapplication.BillzApp
 import com.kevine.billzapplication.Database.BillsDb
+import com.kevine.billzapplication.api.ApiClient
+import com.kevine.billzapplication.api.ApiInterface
 import com.kevine.billzapplication.model.Bill
 import com.kevine.billzapplication.model.UpcomingBill
 import com.kevine.billzapplication.utils.Constants
@@ -18,6 +20,9 @@ class BillsRepo {
     var db = BillsDb.getDatabase(BillzApp.appContext)
     val billsDao = db.billsDao()
     val upcomingBillsDao = db.upcomingBillsDao()
+    val apiClient = ApiClient.buildClient(ApiInterface::class.java)
+
+
 
     suspend fun saveBill(bill:Bill){
         withContext(Dispatchers.IO){
@@ -59,7 +64,8 @@ class BillsRepo {
                         frequency = bill.frequency,
                         dueDate = DateTimeUtils.createDateFromDay(bill.dueDate),
                         userId = bill.userId,
-                        paid = false
+                        paid = false,
+                        synced = false
                     )
                     insertUpcomingBills(newUpcomingBill)
                 }
@@ -87,7 +93,8 @@ class BillsRepo {
                         frequency = bill.frequency,
                         dueDate = DateTimeUtils.getDateOfWeekDay(bill.dueDate),
                         userId = bill.userId,
-                        paid = false
+                        paid = false,
+                        synced = false
                     )
                     upcomingBillsDao.insertUpcomingBills(newUpcomingWeeklyBill)
                 }
@@ -111,7 +118,8 @@ class BillsRepo {
                         frequency = bill.frequency,
                         dueDate = "$year-${bill.dueDate}",
                         userId = bill.userId,
-                        paid = false
+                        paid = false,
+                        synced = false
                     )
                     upcomingBillsDao.insertUpcomingBills(newAnnualBill)
                 }
@@ -132,5 +140,32 @@ class BillsRepo {
 
     fun getPaidBills():LiveData<List<UpcomingBill>>{
         return upcomingBillsDao.getPaidBills()
+    }
+
+    suspend fun syncBills(){
+        withContext(Dispatchers.IO){
+            val unsyncedBills=billsDao.getUnsyncedBills()
+            unsyncedBills.forEach {bill->
+            val response= apiClient.postBill(bill)
+            if (response.isSuccessful){
+                bill.synced=true
+                billsDao.insertBill(bill)
+            }
+
+            }
+        }
+    }
+
+    suspend fun syncUpcomingBills(){
+        withContext(Dispatchers.IO){
+            upcomingBillsDao.getUnsyncedUpcomingBills().forEach { upcomingBill ->
+                val response=apiClient.postUpcomingBill(upcomingBill)
+                if (response.isSuccessful){
+                    upcomingBill.synced=true
+                    upcomingBillsDao.updateUpcomingBill(upcomingBill)
+                }
+
+            }
+        }
     }
 }
