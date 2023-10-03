@@ -84,6 +84,9 @@ class AddBillActivity : AppCompatActivity() {
 
     }
 
+
+
+
     fun setUpDueDateSpinner(dates: Array<Int>) {
         val dueDateAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, dates)
         dueDateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item)

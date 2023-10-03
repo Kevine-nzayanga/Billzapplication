@@ -24,12 +24,12 @@ class BillzApp:Application() {
         val periodicWorkRequest = PeriodicWorkRequestBuilder<UpcomingBillsWorker>(15, TimeUnit.MINUTES)
             .addTag(Constants.CREATE_UPCOMING_BILLS).build()
 
-        WorkManager
-            .getInstance(appContext)
+        WorkManager.getInstance(appContext)
             .enqueueUniquePeriodicWork(Constants.CREATE_UPCOMING_BILLS,
             ExistingPeriodicWorkPolicy.KEEP,periodicWorkRequest)
 
         val constraints= Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build()
+
         val syncPeriodicWorkRequest = PeriodicWorkRequestBuilder<DataSynchWorker>(1,TimeUnit.HOURS)
             .addTag(Constants.SYNC_BILLS).setConstraints(constraints).build()
 
