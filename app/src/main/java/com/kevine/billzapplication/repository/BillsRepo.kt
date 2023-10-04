@@ -179,4 +179,30 @@ class BillsRepo {
             }
         }
     }
+
+    suspend fun fetchRemoteBills(){
+        withContext(Dispatchers.IO){
+            val token = getAccessToken()
+            val response = apiClient.fetchRemoteBills(token)
+            if (response.isSuccessful) {
+                response.body()?.forEach { bill ->
+                    billsDao.insertBill(bill)
+
+                }
+            }
+        }
+    }
+
+    suspend fun fetchUpcomingRemoteBills(){
+        withContext(Dispatchers.IO){
+            val token = getAccessToken()
+            val response = apiClient.fetchUpcomingBills(token)
+            if (response.isSuccessful) {
+                response.body()?.forEach { upcomingBill ->
+                    upcomingBillsDao.insertUpcomingBills(upcomingBill)
+
+                }
+            }
+        }
+    }
 }

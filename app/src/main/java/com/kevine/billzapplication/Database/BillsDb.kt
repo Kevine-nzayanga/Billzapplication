@@ -17,7 +17,7 @@ abstract fun upcomingBillsDao(): UpcomingBillsDao
 companion object{
     var database:BillsDb?= null
 
-    fun getDatabase(context:Context):BillsDb{
+    fun getDatabase(context:Context):BillsDb {
         if (database == null){
             database = Room
                 .databaseBuilder(context, BillsDb::class.java,"BillzDb")

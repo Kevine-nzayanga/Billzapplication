@@ -50,4 +50,13 @@ class BillsViewModel:ViewModel() {
         return billsRepo.getPaidBills()
     }
 
+//    we launch coroutine when launching suspend functions
+    fun downloadRemoteData(){
+        viewModelScope.launch {
+            billsRepo.fetchRemoteBills()
+            billsRepo.fetchUpcomingRemoteBills()
+        }
+
+    }
+
     }

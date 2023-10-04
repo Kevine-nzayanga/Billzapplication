@@ -20,6 +20,14 @@ class DateTimeUtils {
             val sdf = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             return sdf.format(LocalDate)
         }
+
+        fun formatDate2():String{
+            val now  = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:SS.zzzzzz")
+            return formatter.format(now)
+        }
+
+
         fun getFirstDayOfWeek():String{
             val now = LocalDateTime.now()
           val first=  now.with(previousOrSame(MONDAY))

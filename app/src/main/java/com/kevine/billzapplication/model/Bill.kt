@@ -9,12 +9,14 @@ import java.time.temporal.TemporalAmount
 
 @Entity(tableName = "Bills",
     indices = [Index(value = ["name"], unique = true)])
+
+
 data class Bill(
-  @SerializedName("bill_id")  @PrimaryKey val billId:String,
-    var name:String,
-    var amount:Double,
-    var frequency:String,
-    @SerializedName("due_date") var dueDate:String,
-   @SerializedName("user_id") var userId:String,
+  @Expose @SerializedName("bill_id")  @PrimaryKey val billId:String,
+  @Expose  var name:String,
+  @Expose  var amount:Double,
+  @Expose var frequency:String,
+  @Expose  @SerializedName("due_date") var dueDate:String,
+  @Expose @SerializedName("user_id") var userId:String,
    @Expose(serialize = false) var synced:Boolean
 )

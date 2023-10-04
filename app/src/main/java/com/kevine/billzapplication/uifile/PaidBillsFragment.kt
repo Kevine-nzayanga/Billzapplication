@@ -44,6 +44,7 @@ class PaidBillsFragment : Fragment(),OnClickBill {
 
     override fun checkPaidBill(upcomingBill: UpcomingBill) {
         upcomingBill.paid = !upcomingBill.paid
+        !upcomingBill.synced
         billsViewModel.updateUpcomingBill(upcomingBill)
     }
 

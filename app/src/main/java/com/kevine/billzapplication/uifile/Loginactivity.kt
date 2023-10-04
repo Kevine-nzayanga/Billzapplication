@@ -12,11 +12,14 @@ import com.kevine.billzapplication.databinding.ActivityLoginactivityBinding
 import com.kevine.billzapplication.model.LoginRequest
 import com.kevine.billzapplication.model.LoginResponse
 import com.kevine.billzapplication.utils.Constants
+import com.kevine.billzapplication.viewmodel.BillsViewModel
 import com.kevine.billzapplication.viewmodel.UserViewModel
 
 class Loginactivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginactivityBinding
     val userViewModel:UserViewModel by viewModels()
+    val billsViewModel:BillsViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginactivityBinding.inflate(layoutInflater)
@@ -104,7 +107,8 @@ class Loginactivity : AppCompatActivity() {
     fun initobserver() {
         userViewModel.regLiveDataLogin.observe(this) { loginResponse ->
             persistlogin(loginResponse)
-            //            binding.pblogin.visibility = View.GONe
+            billsViewModel.downloadRemoteData()
+            //            binding.pblogin.visibility = View.GONE
             Toast.makeText(this, loginResponse.message, Toast.LENGTH_LONG).show()
             startActivity(Intent(this@Loginactivity, HomeActivity::class.java))
         }

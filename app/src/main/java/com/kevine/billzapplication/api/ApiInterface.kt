@@ -8,6 +8,7 @@ import com.kevine.billzapplication.model.RegisterResponse
 import com.kevine.billzapplication.model.UpcomingBill
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
@@ -27,5 +28,11 @@ interface ApiInterface {
 
     @POST("/upcoming-bills")
       suspend fun postUpcomingBill(@Header("Authorization")token:String,@Body upcomingBill: UpcomingBill): Response<UpcomingBill>
+
+    @GET("/bills")
+    suspend fun fetchRemoteBills(@Header("Authorization") token: String):Response<List<Bill>>
+
+    @GET("upcoming-bills")
+    suspend fun fetchUpcomingBills(@Header("Authorization") token: String):Response<List<UpcomingBill>>
 
 }
