@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "259605944386",
+    "project_id": "billz-a84f3",
+    "storage_bucket": "billz-a84f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:259605944386:android:96567c7430b5ccdfdfb5db",
+        "android_client_info": {
+          "package_name": "com.kevine.billzapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEzeQiqHETLxEbp5cgzyElkgm5s-lqyIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

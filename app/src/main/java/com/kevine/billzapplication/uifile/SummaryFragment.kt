@@ -43,9 +43,9 @@ val billsViewModel:BillsViewModel by viewModels()
 
     fun showMonthlySummary(){
         billsViewModel.summaryLiveData.observe(this){summary->
-            binding?.tvPaidAmt?.text=Utils.formatCurrency(summary.paid)
+            binding?.tvPaidAmt?.text=Utils.formatCurrency(summary.upcoming)
             binding?.tvOverdueAmt?.text=Utils.formatCurrency(summary.overdue)
-            binding?.tvUpcomingAmt?.text=Utils.formatCurrency(summary.upcoming)
+            binding?.tvUpcomingAmt?.text=Utils.formatCurrency(summary.paid)
             binding?.tvTotalAmt?.text=Utils.formatCurrency(summary.total)
             ShowChart(summary)
         }

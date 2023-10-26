@@ -6,6 +6,11 @@
     <color name="cyan">#5BEBA9</color>
     <color name="red">#D32F2F</color>
     <color name="blue">#5B5CEB</color>
+    <color name="darkgreen">#20801B</color>
+    <color name="darkergreen">#0D360B</color>
+
+
+
 
 
 </resources>

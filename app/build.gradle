@@ -2,6 +2,9 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+
 }
 
 android {
@@ -64,6 +67,10 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:2.8.1"
     implementation 'com.github.andhikayuana:simple-pie-chart-android:e7d9622aa9'
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.5'
+    implementation platform('com.google.firebase:firebase-bom:32.4.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
 
 
 }

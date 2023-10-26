@@ -2,7 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Billzapplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">@color/darkergreen</item>
+        <item name="colorSecondary">@color/darkgreen</item>
+        
     </style>
 
     <style name="Theme.Billzapplication" parent="Base.Theme.Billzapplication" />
