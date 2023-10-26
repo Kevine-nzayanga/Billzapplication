@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "UpcomingBills",
     indices = [Index(value = ["billId","dueDate"], unique = true)])
 
-data class UpcomingBill(
+data class UpcomingBill (
   @Expose  @SerializedName("upcoming_bill_id") @PrimaryKey var upcomingBillId:String,
  @Expose @SerializedName("bill_id")  var billId:String,
  @Expose   var name:String,

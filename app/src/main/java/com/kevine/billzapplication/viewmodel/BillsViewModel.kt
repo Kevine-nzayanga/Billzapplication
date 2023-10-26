@@ -1,9 +1,11 @@
 package com.kevine.billzapplication.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kevine.billzapplication.model.Bill
+import com.kevine.billzapplication.model.BillsSummary
 import com.kevine.billzapplication.model.UpcomingBill
 import com.kevine.billzapplication.repository.BillsRepo
 import com.kevine.billzapplication.utils.Constants
@@ -11,8 +13,9 @@ import kotlinx.coroutines.launch
 
 class BillsViewModel:ViewModel() {
     val billsRepo = BillsRepo()
+    val summaryLiveData= MutableLiveData<BillsSummary>()
 
-    fun saveBill(bill: Bill){
+    fun saveBill(bill: Bill) {
         viewModelScope.launch {
             billsRepo.saveBill(bill)
         }
@@ -55,6 +58,13 @@ class BillsViewModel:ViewModel() {
         viewModelScope.launch {
             billsRepo.fetchRemoteBills()
             billsRepo.fetchUpcomingRemoteBills()
+        }
+
+    }
+
+    fun getMonthlySummary(){
+        viewModelScope.launch {
+            summaryLiveData.postValue(billsRepo.getMonthlySummary())
         }
 
     }

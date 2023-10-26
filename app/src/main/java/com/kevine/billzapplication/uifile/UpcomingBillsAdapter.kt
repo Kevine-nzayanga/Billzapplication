@@ -8,6 +8,7 @@ import com.kevine.billzapplication.databinding.UpcomingBillsListItemBinding
 import com.kevine.billzapplication.model.Bill
 import com.kevine.billzapplication.model.UpcomingBill
 import com.kevine.billzapplication.utils.DateTimeUtils
+import com.kevine.billzapplication.utils.Utils
 
 class UpcomingBillsAdapter(var upcomingBills:List<UpcomingBill>, val onClickBill: OnClickBill):
 Adapter<UpcomingBillsViewHolder>(){
@@ -27,7 +28,7 @@ Adapter<UpcomingBillsViewHolder>(){
             cbupcoming.isChecked=upcomingBill.paid
             cbupcoming.text=upcomingBill.name
             tvamount.text = upcomingBill.amount.toString()
-            tvamount.text = DateTimeUtils.formatCurrency(upcomingBill.amount)
+            tvamount.text = Utils.formatCurrency(upcomingBill.amount)
 //            tvdueDate.text=upcomingBill.dueDate
             tvdueDate.text=DateTimeUtils.formatDateReadable(upcomingBill.dueDate)
 

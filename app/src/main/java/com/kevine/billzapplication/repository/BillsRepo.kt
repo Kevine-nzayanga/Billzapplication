@@ -7,6 +7,7 @@ import com.kevine.billzapplication.Database.BillsDb
 import com.kevine.billzapplication.api.ApiClient
 import com.kevine.billzapplication.api.ApiInterface
 import com.kevine.billzapplication.model.Bill
+import com.kevine.billzapplication.model.BillsSummary
 import com.kevine.billzapplication.model.UpcomingBill
 import com.kevine.billzapplication.utils.Constants
 import com.kevine.billzapplication.utils.DateTimeUtils
@@ -77,7 +78,6 @@ class BillsRepo {
     }
 
     suspend fun createRecurringWeeklyBills(){
-
         withContext(Dispatchers.IO){
             val weeklyBills= billsDao.getReccuringBills(Constants.WEEKLY)
             val startDate = DateTimeUtils.getFirstDayOfWeek()
@@ -203,6 +203,24 @@ class BillsRepo {
 
                 }
             }
+        }
+    }
+
+    suspend fun getMonthlySummary():BillsSummary {
+        return withContext(Dispatchers.IO){
+            val startDate = DateTimeUtils.getFirstDayOfMonth()
+            val endDate = DateTimeUtils.getLastDayOfMonth()
+            val today = DateTimeUtils.getCurrentDate()
+
+            val paid = upcomingBillsDao.getTotalPaidMonthly(startDate,endDate)
+            val upcoming = upcomingBillsDao.getUpcomingAmountThisMonth(startDate,endDate,today)
+            val overdue= upcomingBillsDao.getOverdueAmountThisMonth(startDate,endDate,today)
+            val total = upcomingBillsDao.getTotalMonthlyAmount(startDate,endDate)
+
+            val summary = BillsSummary(paid= paid, upcoming =upcoming, overdue=overdue, total=total)
+
+            summary
+
         }
     }
 }

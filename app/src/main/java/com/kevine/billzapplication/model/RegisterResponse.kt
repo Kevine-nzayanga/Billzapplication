@@ -1,6 +1,8 @@
 package com.kevine.billzapplication.model
 
-data class RegisterResponse(
-    var message:String,
-    var user:User
+import com.google.gson.annotations.Expose
+
+data class RegisterResponse (
+   @Expose var message:String,
+   @Expose var user:User
 )

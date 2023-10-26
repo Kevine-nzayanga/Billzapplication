@@ -91,12 +91,11 @@ class DateTimeUtils {
             val now= LocalDateTime.now()
             return now.year.toString()
         }
-        fun formatCurrency(amount: Double):String{
-            val formatter = DecimalFormat("KES #,###.##")
-            return  formatter.format(amount)
+
+        fun getCurrentDate():String{
+            return formatDate(LocalDateTime.now())
         }
 
     }
 }
 
-//zero means false one means true

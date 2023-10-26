@@ -19,4 +19,7 @@ interface BillsDao {
     fun getUnsyncedBills(): List<Bill>
 
 
+
+
+
 }
