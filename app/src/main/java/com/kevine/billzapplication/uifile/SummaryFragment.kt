@@ -65,19 +65,6 @@ val billsViewModel:BillsViewModel by viewModels()
         binding?.summaryChart?.setChart(pieChart)
     }
 
-//    fun displayPieChart(summary: BillsSummary) {
-//        binding?.pieChart?.apply{
-//            setDataPoints(floatArrayOf(summary.paid.toFloat(),summary.upcoming.toFloat(),summary.overdue.toFloat()))
-//            setCenterColor(android.R.color.white)
-//            setSliceColor(intArrayOf(R.color.green))
-//        }
-//    }
-//
-//
-//
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//    }
 
 
     override fun onDestroyView() {
