@@ -7,13 +7,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.anychart.BuildConfig
 import com.kevine.billzapplication.R
 import com.kevine.billzapplication.databinding.FragmentSettingsBinding
 import com.kevine.billzapplication.databinding.FragmentSummaryBinding
 import com.kevine.billzapplication.utils.Constants
+import com.kevine.billzapplication.viewmodel.BillsViewModel
 
 class SettingsFragment : Fragment() {
+    val billsViewModel:BillsViewModel by viewModels()
     var binding :FragmentSettingsBinding? = null
 
     override fun onCreateView(
@@ -28,6 +31,7 @@ class SettingsFragment : Fragment() {
         super.onResume()
         binding?.tvAppVersion?.text = "App Version ${com.kevine.billzapplication.BuildConfig.VERSION_NAME}"
         binding?.tvLogOut?.setOnClickListener { logout() }
+        binding?.pbSync?.setOnClickListener { billsViewModel.downloadRemoteData() }
 
     }
 
@@ -41,6 +45,8 @@ class SettingsFragment : Fragment() {
         editor.apply()
 
     }
+
+
 
     override fun onDestroy() {
         super.onDestroy()
